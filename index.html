@@ -8,23 +8,20 @@
         <img id="img" src="" alt="">
         <script src="/socket.io/socket.io.js"></script>
         <script type="text/javascript">
-            // var socket = io();
+            var socket = io();
 
             var image = document.getElementById('img');
 
-            setInterval(function() {
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == XMLHttpRequest.DONE) {
-                        image.src = 'data:image/jpeg;base64,'+xhr.responseText;
-                    }
+            // setInterval(function() {     var xhr = new XMLHttpRequest();     xhr.onreadystatechange = function() {         if (xhr.readyState == XMLHttpRequest.DONE) {             image.src = 'data:image/jpeg;base64,'+xhr.responseText;         }     }
+            // xhr.open('GET', '/image', true);     xhr.send();
+            //
+            // }, 500)
+
+            socket.on("image", function(info) {
+                if (info.image) {
+                    image.src = 'data:image/jpeg;base64,' + info.buffer;
                 }
-                xhr.open('GET', '/image', true);
-                xhr.send();
-
-            }, 500)
-
-            // socket.on("image", function(info) {     if (info.image) {         image.src = 'data:image/jpeg;base64,' + info.buffer;     } });
+            });
         </script>
         <style media="screen">
             #img {

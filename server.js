@@ -51,17 +51,17 @@ io.on('connection', function(socket){
 
 
   var callback = function () {
-    // fs.readFile(__dirname + '/images/image.jpg', function(err, buf){
+    fs.readFile(__dirname + '/images/image.jpg', function(err, buf){
       // it's possible to embed binary data
       // within arbitrarily-complex objects
-      // globalSocket.emit('image', { image: true, buffer: buf.toString('base64') });
-      // console.log('image file is initialized');
-    // });
+      globalSocket.emit('image', { image: true, buffer: buf.toString('base64') });
+      console.log('image file is initialized');
+    });
   };
 
 // trying to serve the image file from the server
 setInterval(function () {
-  // if(globalSocket !== null){
+  if(globalSocket !== null){
     exec("screencapture -C -x -t jpg images/image.jpg", callback);
-  // }
-}, 500);
+  }
+}, 100);
