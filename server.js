@@ -64,4 +64,4 @@ setInterval(function () {
   // if(globalSocket !== null){
     exec("screencapture -C -x -t jpg images/image.jpg", callback);
   // }
-}, 500);
+}, 100);
